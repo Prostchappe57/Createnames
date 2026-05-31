@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impressum – CreateNames.ch</title>
+  <meta name="robots" content="noindex, follow" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold: #c9a84c; --gold-light: #e8c97a; --gold-dark: #8a6f2e;
+      --bg: #0a0806; --bg2: #130f09; --bg3: #1c1610;
+      --text: #f0e6d0; --text-muted: #8a7a60; --radius: 12px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; min-height:100vh; }
+    body::before {
+      content:''; position:fixed; inset:0;
+      background: radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.05) 0%, transparent 60%);
+      pointer-events:none; z-index:0;
+    }
+    nav {
+      position:relative; z-index:10;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:20px 40px; border-bottom:1px solid rgba(201,168,76,0.1);
+      background:rgba(10,8,6,0.8); backdrop-filter:blur(10px);
+    }
+    .nav-logo {
+      font-family:'Cinzel Decorative',cursive; font-size:18px; font-weight:900;
+      background:linear-gradient(135deg,#8a6f2e 0%,#e8c97a 50%,#8a6f2e 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      letter-spacing:1px; text-decoration:none;
+    }
+    .nav-back {
+      color:var(--text-muted); text-decoration:none;
+      font-family:'Cinzel',serif; font-size:11px; letter-spacing:2px;
+      text-transform:uppercase; transition:color 0.2s;
+    }
+    .nav-back:hover { color:var(--gold); }
+    .container {
+      max-width:720px; margin:0 auto;
+      padding:60px 24px 100px;
+      position:relative; z-index:1;
+    }
+    .page-title {
+      font-family:'Cinzel Decorative',cursive; font-size:32px;
+      background:linear-gradient(135deg,#8a6f2e,#e8c97a,#c9a84c,#8a6f2e);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      margin-bottom:8px;
+    }
+    .page-subtitle {
+      font-family:'Cinzel',serif; font-size:11px; letter-spacing:4px;
+      color:var(--text-muted); text-transform:uppercase; margin-bottom:40px;
+    }
+    .divider {
+      display:flex; align-items:center; gap:12px; margin-bottom:40px; max-width:200px;
+    }
+    .divider::before,.divider::after { content:''; flex:1; height:1px; }
+    .divider::before { background:linear-gradient(to right,transparent,var(--gold-dark)); }
+    .divider::after { background:linear-gradient(to left,transparent,var(--gold-dark)); }
+    .divider-icon { color:var(--gold); font-size:12px; }
+    .section {
+      background:var(--bg2); border:1px solid rgba(201,168,76,0.12);
+      border-radius:var(--radius); padding:28px 32px; margin-bottom:20px;
+    }
+    .section h2 {
+      font-family:'Cinzel',serif; font-size:11px; letter-spacing:3px;
+      color:var(--gold); text-transform:uppercase; margin-bottom:18px;
+    }
+    .section p, .section address {
+      font-size:14px; color:#b0a090; line-height:1.9;
+      font-style:normal;
+    }
+    .section a { color:var(--gold); text-decoration:none; }
+    .section a:hover { text-decoration:underline; }
+    .section p + p { margin-top:10px; }
+    .notice {
+      font-size:12px; color:var(--text-muted); line-height:1.8;
+      border-top:1px solid rgba(201,168,76,0.1); padding-top:16px; margin-top:16px;
+    }
+    footer {
+      position:relative; z-index:1;
+      border-top:1px solid rgba(201,168,76,0.1);
+      padding:24px 40px; text-align:center;
+      font-size:11px; color:var(--text-muted);
+      font-family:'Cinzel',serif; letter-spacing:1px;
+    }
+    footer a { color:var(--gold); text-decoration:none; margin:0 12px; }
+    @media(max-width:600px){
+      nav { padding:16px 20px; }
+      .container { padding:40px 16px 80px; }
+      .section { padding:20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">CreateNames</a>
+  <a href="/" class="nav-back">← Zurück</a>
+</nav>
+
+<div class="container">
+  <h1 class="page-title">Impressum</h1>
+  <div class="page-subtitle">Legal Notice</div>
+  <div class="divider"><span class="divider-icon">✦</span></div>
+
+  <div class="section">
+    <h2>Angaben gemäss Art. 13 DSG (Schweiz)</h2>
+    <address>
+      <!-- BITTE AUSFÜLLEN: -->
+      Vorname Nachname<br />
+      Musterstrasse 1<br />
+      1234 Musterstadt<br />
+      Schweiz
+    </address>
+  </div>
+
+  <div class="section">
+    <h2>Kontakt</h2>
+    <p>E-Mail: <a href="mailto:info@createnames.ch">info@createnames.ch</a></p>
+    <!-- Optional: Telefon hinzufügen -->
+  </div>
+
+  <div class="section">
+    <h2>Verantwortlich für den Inhalt</h2>
+    <p>
+      Vorname Nachname (wie oben angegeben).<br />
+      Diese Website ist ein privates, nicht-kommerzielles Angebot.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Haftungsausschluss</h2>
+    <p>
+      Alle Inhalte dieser Website wurden mit grösster Sorgfalt erstellt. Für die Richtigkeit,
+      Vollständigkeit und Aktualität der Inhalte wird jedoch keine Gewähr übernommen.
+    </p>
+    <p>
+      Als Diensteanbieter ist der Betreiber gemäss Art. 6 KKG für eigene Inhalte verantwortlich.
+      Für externe Links übernimmt der Betreiber keine Haftung, da deren Inhalte ausserhalb des
+      Einflussbereiches liegen.
+    </p>
+    <div class="notice">
+      Die generierten Namen sind fiktiv und dienen ausschliesslich der Unterhaltung.
+      Ähnlichkeiten mit realen Personen oder Marken sind rein zufällig.
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Urheberrecht</h2>
+    <p>
+      Die Inhalte und Werke dieser Website unterliegen dem Schweizer Urheberrecht.
+      Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung ausserhalb
+      der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des Autors.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Werbung</h2>
+    <p>
+      Diese Website verwendet Google AdSense, einen Dienst der Google LLC, zur Einblendung
+      von Werbeanzeigen. Weitere Informationen finden Sie in der
+      <a href="/datenschutz">Datenschutzerklärung</a>.
+    </p>
+  </div>
+</div>
+
+<footer>
+  <a href="/">Home</a>
+  <a href="/datenschutz">Datenschutz</a>
+  © 2025 CreateNames.ch
+</footer>
+
+</body>
+</html>

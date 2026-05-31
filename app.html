@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyLegacy – Entdecke dein Vermächtnis</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dark: #8a6f2e;
+    --bg: #0a0806;
+    --bg2: #130f09;
+    --bg3: #1c1610;
+    --text: #f0e6d0;
+    --text-muted: #8a7a60;
+    --radius: 12px;
+    --rose: #c97a8a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; overflow-x: hidden; }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background: radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 80%, rgba(201,168,76,0.04) 0%, transparent 60%);
+    pointer-events: none; z-index: 0;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; position: relative; z-index: 1; }
+
+  /* Lang */
+  .lang-switcher { display: flex; justify-content: flex-end; gap: 8px; margin-bottom: 32px; }
+  .lang-btn { background: transparent; border: 1px solid var(--gold-dark); color: var(--text-muted); padding: 4px 12px; border-radius: 20px; cursor: pointer; font-size: 12px; font-family: 'Cinzel', serif; letter-spacing: 1px; transition: all 0.2s; }
+  .lang-btn.active, .lang-btn:hover { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+
+  /* Header */
+  header { text-align: center; margin-bottom: 48px; animation: fadeDown 0.8s ease; }
+  .logo { font-family: 'Cinzel Decorative', cursive; font-size: clamp(36px,8vw,72px); font-weight: 900; background: linear-gradient(135deg,#8a6f2e 0%,#e8c97a 40%,#c9a84c 60%,#8a6f2e 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 2px; line-height: 1.1; margin-bottom: 8px; }
+  .tagline { font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 4px; color: var(--text-muted); text-transform: uppercase; }
+  .divider { display: flex; align-items: center; gap: 16px; margin: 24px auto; max-width: 300px; }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; }
+  .divider::before { background: linear-gradient(to right, transparent, var(--gold-dark)); }
+  .divider::after { background: linear-gradient(to left, transparent, var(--gold-dark)); }
+  .divider-icon { color: var(--gold); font-size: 16px; }
+
+  /* Input */
+  .input-section { background: var(--bg2); border: 1px solid rgba(201,168,76,0.2); border-radius: var(--radius); padding: 32px; margin-bottom: 32px; animation: fadeUp 0.8s ease 0.1s both; }
+  .input-label { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 12px; display: block; }
+  .input-row { display: flex; gap: 12px; }
+  .name-input { flex: 1; background: var(--bg3); border: 1px solid rgba(201,168,76,0.3); border-radius: 8px; padding: 14px 20px; color: var(--text); font-family: 'Cinzel', serif; font-size: 16px; outline: none; transition: border-color 0.2s; }
+  .name-input:focus { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(201,168,76,0.1); }
+  .name-input::placeholder { color: var(--text-muted); }
+  .generate-btn { background: linear-gradient(135deg, var(--gold-dark), var(--gold)); border: none; border-radius: 8px; padding: 14px 28px; color: var(--bg); font-family: 'Cinzel', serif; font-weight: 600; font-size: 14px; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+  .generate-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(201,168,76,0.3); }
+
+  /* Gender indicator */
+  .gender-indicator { display: none; align-items: center; gap: 10px; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 1px; }
+  .gender-indicator.male { background: rgba(76,130,201,0.1); border: 1px solid rgba(76,130,201,0.25); color: #7ab0e8; }
+  .gender-indicator.female { background: rgba(201,122,138,0.1); border: 1px solid rgba(201,122,138,0.25); color: var(--rose); }
+  .gender-indicator.neutral { background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); color: var(--gold); }
+  .gender-icon { font-size: 18px; }
+
+  /* Categories */
+  .categories-title { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 16px; display: block; }
+  .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .filter-all-btn { background: var(--gold); color: var(--bg); border: none; border-radius: 6px; padding: 6px 14px; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 1px; cursor: pointer; }
+  .categories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; }
+  .cat-btn { background: var(--bg3); border: 1px solid rgba(201,168,76,0.15); border-radius: 8px; padding: 10px 8px; color: var(--text-muted); font-size: 12px; cursor: pointer; transition: all 0.2s; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .cat-btn:hover { border-color: var(--gold-dark); color: var(--text); background: rgba(201,168,76,0.05); }
+  .cat-btn.active { background: rgba(201,168,76,0.12); border-color: var(--gold); color: var(--gold-light); }
+  .cat-btn .cat-emoji { font-size: 20px; }
+  .cat-btn .cat-name { font-size: 10px; letter-spacing: 0.5px; font-family: 'Cinzel', serif; }
+
+  /* Results */
+  .results-title { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 16px; text-align: center; }
+  .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+  .result-card { background: var(--bg2); border: 1px solid rgba(201,168,76,0.15); border-radius: var(--radius); padding: 20px; transition: all 0.3s; cursor: pointer; animation: cardAppear 0.4s ease both; position: relative; overflow: hidden; }
+  .result-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, transparent, var(--gold), transparent); opacity: 0; transition: opacity 0.3s; }
+  .result-card.female-card::before { background: linear-gradient(to right, transparent, var(--rose), transparent); }
+  .result-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
+  .result-card:hover::before { opacity: 1; }
+  .result-cat { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .result-emoji { font-size: 22px; }
+  .result-cat-name { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; }
+  .result-name { font-family: 'Cinzel', serif; font-size: 18px; font-weight: 600; color: var(--gold-light); line-height: 1.3; margin-bottom: 8px; }
+  .result-card.female-card .result-name { color: #e8a0b0; }
+  .result-meaning { font-size: 11px; color: var(--text-muted); font-style: italic; line-height: 1.5; }
+  .gender-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; margin-top: 8px; padding: 3px 8px; border-radius: 10px; font-family: 'Cinzel', serif; letter-spacing: 1px; }
+  .gender-badge.m { background: rgba(76,130,201,0.15); color: #7ab0e8; }
+  .gender-badge.f { background: rgba(201,122,138,0.15); color: var(--rose); }
+  .copy-hint { font-size: 10px; color: var(--gold-dark); margin-top: 10px; font-family: 'Cinzel', serif; letter-spacing: 1px; opacity: 0; transition: opacity 0.2s; }
+  .result-card:hover .copy-hint { opacity: 1; }
+
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+  .empty-icon { font-size: 48px; margin-bottom: 16px; }
+  .empty-text { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 2px; color: var(--text-muted); }
+
+  .copied-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--gold); color: var(--bg); padding: 10px 24px; border-radius: 30px; font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 1px; opacity: 0; transition: all 0.3s; pointer-events: none; z-index: 100; }
+  .copied-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes cardAppear { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+
+  @media (max-width: 600px) {
+    .input-row { flex-direction: column; }
+    .results-grid { grid-template-columns: 1fr; }
+    .categories-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('de')">DE</button>
+    <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+
+  <header>
+    <div class="logo">MyLegacy</div>
+    <div class="tagline" id="tagline">Entdecke dein Vermächtnis</div>
+    <div class="divider"><span class="divider-icon">✦</span></div>
+  </header>
+
+  <div class="input-section">
+    <label class="input-label" id="input-label">Dein Name</label>
+    <div class="input-row">
+      <input type="text" class="name-input" id="nameInput" placeholder="z.B. Fabian oder Andrea" oninput="detectGender(this.value)" />
+      <button class="generate-btn" onclick="generate()" id="gen-btn">Entdecken ✦</button>
+    </div>
+    <div class="gender-indicator" id="genderIndicator">
+      <span class="gender-icon" id="genderIcon"></span>
+      <span id="genderText"></span>
+    </div>
+  </div>
+
+  <div class="input-section">
+    <label class="categories-title" id="cat-label">Universen wählen</label>
+    <div class="filter-bar">
+      <button class="filter-all-btn" onclick="selectAll()" id="sel-all-btn">Alle wählen</button>
+      <button class="filter-all-btn" style="background:var(--bg3);color:var(--text-muted);border:1px solid rgba(201,168,76,0.2)" onclick="selectNone()" id="sel-none-btn">Keine</button>
+    </div>
+    <div class="categories-grid" id="catGrid"></div>
+  </div>
+
+  <div id="resultsSection" style="display:none">
+    <div class="results-title" id="results-label">Deine Legenden-Namen</div>
+    <div class="results-grid" id="resultsGrid"></div>
+  </div>
+
+  <div id="emptyState" class="empty-state" style="display:none">
+    <div class="empty-icon">⚔️</div>
+    <div class="empty-text" id="empty-text">Wähle mindestens ein Universum</div>
+  </div>
+</div>
+
+<div class="copied-toast" id="toast"></div>
+
+<script>
+// ── i18n ──────────────────────────────────────────────────────────────────────
+const i18n = {
+  de: {
+    tagline:'Entdecke dein Vermächtnis', inputLabel:'Dein Name', genBtn:'Entdecken ✦',
+    catLabel:'Universen wählen', selAll:'Alle wählen', selNone:'Keine',
+    resultsLabel:'Deine Legenden-Namen', emptyText:'Wähle mindestens ein Universum',
+    noName:'Bitte gib deinen Namen ein', copyHint:'Klicken zum Kopieren', copied:'Kopiert!',
+    genderMale:'Männlicher Name erkannt', genderFemale:'Weiblicher Name erkannt', genderNeutral:'Name erkannt',
+    badgeM:'♂ Männlich', badgeF:'♀ Weiblich', placeholder:'z.B. Fabian oder Andrea',
+  },
+  fr: {
+    tagline:'Découvre ton héritage', inputLabel:'Ton prénom', genBtn:'Découvrir ✦',
+    catLabel:'Choisir les univers', selAll:'Tout sélectionner', selNone:'Aucun',
+    resultsLabel:'Tes noms légendaires', emptyText:'Choisis au moins un univers',
+    noName:'Entre ton prénom', copyHint:'Cliquer pour copier', copied:'Copié!',
+    genderMale:'Prénom masculin détecté', genderFemale:'Prénom féminin détecté', genderNeutral:'Prénom détecté',
+    badgeM:'♂ Masculin', badgeF:'♀ Féminin', placeholder:'p.ex. Fabian ou Andrea',
+  },
+  en: {
+    tagline:'Discover your legacy', inputLabel:'Your name', genBtn:'Discover ✦',
+    catLabel:'Choose universes', selAll:'Select all', selNone:'None',
+    resultsLabel:'Your legend names', emptyText:'Choose at least one universe',
+    noName:'Please enter your name', copyHint:'Click to copy', copied:'Copied!',
+    genderMale:'Male name detected', genderFemale:'Female name detected', genderNeutral:'Name detected',
+    badgeM:'♂ Male', badgeF:'♀ Female', placeholder:'e.g. Fabian or Andrea',
+  }
+};
+let lang = 'de';
+
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === l.toUpperCase()));
+  const t = i18n[l];
+  document.getElementById('tagline').textContent = t.tagline;
+  document.getElementById('input-label').textContent = t.inputLabel;
+  document.getElementById('gen-btn').textContent = t.genBtn;
+  document.getElementById('cat-label').textContent = t.catLabel;
+  document.getElementById('sel-all-btn').textContent = t.selAll;
+  document.getElementById('sel-none-btn').textContent = t.selNone;
+  document.getElementById('results-label').textContent = t.resultsLabel;
+  document.getElementById('empty-text').textContent = t.emptyText;
+  document.getElementById('nameInput').placeholder = t.placeholder;
+  document.querySelectorAll('.copy-hint').forEach(el => el.textContent = t.copyHint);
+  detectGender(document.getElementById('nameInput').value);
+  buildCatGrid();
+}
+
+// ── Gender detection ──────────────────────────────────────────────────────────
+const femaleNames = new Set([
+  // DE
+  'andrea','anna','maria','julia','sarah','laura','lisa','lena','emma','sophie','hannah','lea',
+  'katharina','nina','petra','claudia','monika','heike','sabine','susanne','andrea','martina',
+  'christina','stefanie','nicole','daniela','michaela','jessica','jennifer','melanie','nadine',
+  'vanessa','verena','sandra','franziska','angelika','brigitte','ursula','renate','ingrid',
+  'hildegard','gertrude','waltraud','elfriede','edeltraud','lieselotte','hannelore','irmgard',
+  // FR
+  'marie','amelie','camille','claire','alice','charlotte','lucie','mathilde','chloe','lea',
+  'manon','pauline','oceane','inès','ines','elisa','margot','valentine','emilie','julie',
+  'stephanie','isabelle','virginie','nathalie','veronique','sylvie','laurence','helene','cecile',
+  // EN
+  'emily','jessica','ashley','amanda','stephanie','melissa','rachel','samantha','elizabeth',
+  'megan','brittany','chelsea','courtney','kaitlyn','brittney','tiffany','crystal','shannon',
+  // IT/ES/PT
+  'sofia','isabella','valentina','gabriela','fernanda','camila','lucia','paula','diana','rosa',
+  // Slavic/other
+  'olga','natasha','irina','svetlana','tatiana','elena','katarina','milena','ivana','jana',
+  // Nordic female
+  'astrid','ingrid','sigrid','freya','ragnhild','gudrun','helga','solveig','vigdis','hilde',
+  'bjork','sigrun','brynhild','gunnhild','randi','toril','unni','sigrunn',
+  // More common
+  'mary','jane','kate','amy','helen','ruth','grace','eve','dawn','joy','kim','sue','ann',
+  'barbara','carol','diane','donna','gloria','joan','joyce','karen','kathleen','marilyn',
+  'patricia','shirley','virginia','beverly','cheryl','connie','deborah','denise','janet',
+  'judith','linda','margaret','pamela','phyllis','rebecca','rhonda','robin','sharon','teresa',
+  'theresa','tina','wendy','yvonne','alicia','amber','brenda','carla','cynthia','debbie',
+  'diana','donna','eileen','elaine','evelyn','fay','faye','gail','gina','heather','holly',
+  'irene','jackie','jamie','jan','janet','janice','jean','jill','joanne','judy','kelly',
+  'kimberly','kristen','kristin','leah','leslie','linda','lori','louise','lynn','mary',
+  'michelle','miranda','natalie','pam','penny','sandy','sara','selena','sherry','stacy',
+  'sue','tara','teresa','tracy','valerie','vicky','vivian','wendy','yvette',
+]);
+
+const maleNames = new Set([
+  // DE
+  'fabian','thomas','michael','stefan','andreas','christian','daniel','markus','tobias','florian',
+  'sebastian','alexander','martin','jan','felix','nicolas','philipp','patrick','david','tim',
+  'simon','lukas','maximilian','julian','kevin','manuel','benjamin','dominik','nico','marco',
+  'hans','peter','wolfgang','helmut','gerhard','horst','dieter','werner','günter','manfred',
+  'kurt','otto','fritz','walter','ernst','herbert','karl','heinz','erich','konrad',
+  // FR
+  'pierre','jean','paul','louis','antoine','lucas','hugo','gabriel','leo','raphael',
+  'theo','axel','baptiste','clement','quentin','romain','nicolas','alexandre','mathieu','julien',
+  'francois','philippe','christophe','stephane','olivier','laurent','guillaume','sebastien',
+  // EN
+  'james','john','robert','william','richard','charles','joseph','thomas','christopher','daniel',
+  'matthew','anthony','mark','donald','george','kenneth','steven','edward','brian','ronald',
+  'timothy','jason','jeffrey','ryan','jacob','gary','nicholas','eric','stephen','jonathan',
+  'larry','justin','scott','brandon','benjamin','samuel','frank','raymond','gregory','frank',
+  'henry','jack','dennis','jerry','tyler','aaron','jose','adam','nathan','zachary',
+  // IT/ES/PT
+  'carlos','miguel','jose','antonio','manuel','rafael','rodrigo','fernando','diego','pablo',
+  'sergio','juan','pedro','luis','francisco','jorge','alberto','alejandro','roberto','ricardo',
+  // Slavic/other
+  'ivan','dmitry','sergei','alexei','nikolai','vladimir','boris','igor','mikhail','andrei',
+  // Nordic male
+  'erik','björn','leif','sven','gunnar','ragnar','olaf','sigurd','ivar','knut',
+  // More common
+  'adam','alan','alex','alfred','allen','andrew','andy','arnold','barry','bill','bob','brad',
+  'bruce','bryan','carl','chris','chuck','clark','cliff','clint','craig','dale','dan',
+  'dave','dean','derek','doug','drew','dylan','earl','ed','evan','frank','fred','gene',
+  'glen','grant','greg','guy','harold','harry','harvey','howard','hugh','ian','jake','jeff',
+  'jim','joe','joel','jon','jordan','josh','keith','ken','kevin','kirk','lance','lee',
+  'leon','lloyd','luke','mario','mark','matt','max','mike','miles','morgan','neal','neil',
+  'norm','paul','pete','phil','ray','rick','rob','roger','ron','ross','roy','russell',
+  'sam','scott','sean','seth','shane','shawn','terry','todd','tom','tony','travis','trevor',
+  'troy','tyler','victor','wade','warren','wayne','will','zach',
+]);
+
+let currentGender = 'neutral'; // 'male' | 'female' | 'neutral'
+
+function detectGender(name) {
+  const n = name.trim().toLowerCase();
+  const indicator = document.getElementById('genderIndicator');
+  const icon = document.getElementById('genderIcon');
+  const text = document.getElementById('genderText');
+  const t = i18n[lang];
+
+  if (!n) { indicator.style.display = 'none'; currentGender = 'neutral'; return; }
+
+  // Check exact match first
+  let gender = 'neutral';
+  if (femaleNames.has(n)) gender = 'female';
+  else if (maleNames.has(n)) gender = 'male';
+  else {
+    // Heuristic endings
+    const femEndings = ['a','ine','ina','elle','ette','ette','leen','leen','lyn','nie','sie'];
+    const malEndings = ['us','os','er','an','en','on','jan','ian','el','al','ael','uel'];
+    if (femEndings.some(e => n.endsWith(e) && n.length > 3)) gender = 'female';
+    else if (malEndings.some(e => n.endsWith(e) && n.length > 3)) gender = 'male';
+  }
+
+  currentGender = gender;
+  indicator.style.display = 'flex';
+  indicator.className = 'gender-indicator ' + gender;
+
+  if (gender === 'female') {
+    icon.textContent = '♀';
+    text.textContent = t.genderFemale;
+  } else if (gender === 'male') {
+    icon.textContent = '♂';
+    text.textContent = t.genderMale;
+  } else {
+    icon.textContent = '✦';
+    text.textContent = t.genderNeutral;
+  }
+}
+
+// ── Categories ────────────────────────────────────────────────────────────────
+const categories = [
+  { id:'viking',    emoji:'⚔️',  de:'Wikinger',    fr:'Vikings',     en:'Vikings' },
+  { id:'roman',     emoji:'🏛️',  de:'Römer',       fr:'Romains',     en:'Romans' },
+  { id:'greek',     emoji:'🏺',  de:'Griechen',    fr:'Grecs',       en:'Greeks' },
+  { id:'egyptian',  emoji:'⚱️',  de:'Ägypter',     fr:'Égyptiens',   en:'Egyptians' },
+  { id:'celtic',    emoji:'🗡️',  de:'Kelten',      fr:'Celtes',      en:'Celts' },
+  { id:'mongol',    emoji:'🏹',  de:'Mongolen',    fr:'Mongols',     en:'Mongols' },
+  { id:'spartan',   emoji:'🔱',  de:'Spartaner',   fr:'Spartiates',  en:'Spartans' },
+  { id:'aztec',     emoji:'🐉',  de:'Azteken',     fr:'Aztèques',    en:'Aztecs' },
+  { id:'maori',     emoji:'🪃',  de:'Maori',       fr:'Maori',       en:'Maori' },
+  { id:'germanic',  emoji:'🧔',  de:'Germanen',    fr:'Germains',    en:'Germanic' },
+  { id:'brazil',    emoji:'🇧🇷',  de:'Brasilien',   fr:'Brésil',      en:'Brazil' },
+  { id:'sweden',    emoji:'🇸🇪',  de:'Schweden',    fr:'Suède',       en:'Sweden' },
+  { id:'portugal',  emoji:'🇵🇹',  de:'Portugal',    fr:'Portugal',    en:'Portugal' },
+  { id:'nigeria',   emoji:'🇳🇬',  de:'Nigeria',     fr:'Nigéria',     en:'Nigeria' },
+  { id:'argentina', emoji:'🇦🇷',  de:'Argentinien', fr:'Argentine',   en:'Argentina' },
+  { id:'japan',     emoji:'🇯🇵',  de:'Japan',       fr:'Japon',       en:'Japan' },
+  { id:'senegal',   emoji:'🇸🇳',  de:'Senegal',     fr:'Sénégal',     en:'Senegal' },
+  { id:'croatia',   emoji:'🇭🇷',  de:'Kroatien',    fr:'Croatie',     en:'Croatia' },
+  { id:'iceland',   emoji:'🇮🇸',  de:'Island',      fr:'Islande',     en:'Iceland' },
+  { id:'dutch',     emoji:'🇳🇱',  de:'Niederlande', fr:'Pays-Bas',    en:'Netherlands' },
+  { id:'elf',       emoji:'🧝',  de:'Elfen',       fr:'Elfes',       en:'Elves' },
+  { id:'wizard',    emoji:'🧙',  de:'Zauberer',    fr:'Sorciers',    en:'Wizards' },
+  { id:'dragon',    emoji:'🐲',  de:'Drachenreiter',fr:'Dragons',    en:'Dragon Riders' },
+  { id:'scifi',     emoji:'🚀',  de:'Sci-Fi',      fr:'Sci-Fi',      en:'Sci-Fi' },
+  { id:'pirate',    emoji:'🏴‍☠️',  de:'Piraten',     fr:'Pirates',     en:'Pirates' },
+  { id:'western',   emoji:'🤠',  de:'Cowboy',      fr:'Cowboy',      en:'Cowboy' },
+  { id:'vampire',   emoji:'🧛',  de:'Vampire',     fr:'Vampires',    en:'Vampires' },
+  { id:'zombie',    emoji:'🧟',  de:'Zombie',      fr:'Zombie',      en:'Zombie' },
+  { id:'superhero', emoji:'🦸',  de:'Superheld',   fr:'Super-héros', en:'Superhero' },
+  { id:'rpg',       emoji:'🎮',  de:'RPG/D&D',     fr:'RPG/D&D',     en:'RPG/D&D' },
+];
+
+// ── Name databases (male + female) ───────────────────────────────────────────
+const nameData = {
+  viking: {
+    male:   { first:['Björn','Ragnar','Sigurd','Leif','Erik','Ivar','Gunnar','Harald','Olaf','Thorvald','Ulf','Halfdan','Rolf','Sven','Knut','Floki','Rollo','Orm','Asmund','Birger'], last:['Eisenfaust','Sturmwind','Schlangenauge','Bärenschulter','Drachentöter','Blutaxt','Donnerstimme','Seewolf','Eisherz','Schildbrecher'] },
+    female: { first:['Freya','Sigrid','Astrid','Ragnhild','Gudrun','Helga','Ingrid','Brynhild','Valdis','Thyra','Hilde','Signe','Vigdis','Solveig','Gunnhild'], last:['Mondlicht','Schicksalsweberin','Schwertmaid','Walküre','Sternenfeuer','Eisblume','Raben-Herrin','Nornen-Kind','Runenkundig'] },
+    meaning: { de:'des Nordens', fr:'du Nord', en:'of the North' }
+  },
+  roman: {
+    male:   { first:['Marcus','Gaius','Lucius','Titus','Julius','Quintus','Publius','Gnaeus','Appius','Decimus','Aulus','Servius'], last:['Aurelius','Maximus','Brutus','Cassius','Claudius','Corvinus','Flavianus','Hadrianus','Octavianus'], suffix:['Magnus','Felix','Pius','Severus','Victor'] },
+    female: { first:['Livia','Claudia','Julia','Valeria','Cornelia','Fulvia','Octavia','Porcia','Servilia','Agrippina','Messalina','Lucretia'], last:['Maxima','Pia','Felix','Blanda','Secunda','Tertia'], suffix:['Magna','Pia','Clara','Blanda'] },
+    meaning: { de:'des Imperiums', fr:'de l\'Empire', en:'of the Empire' }
+  },
+  greek: {
+    male:   { first:['Alexandros','Nikodemos','Demetrios','Leonidas','Themistokles','Perikles','Sokrates','Odysseus','Achilleus','Hephaistos','Theoklitos'], last:['von Athen','von Sparta','von Korinth','von Olympia','von Delphi'] },
+    female: { first:['Athena','Kalliope','Penelope','Kassandra','Andromeda','Iphigenie','Elektra','Ariadne','Antigone','Medea','Nausikaä','Kleopatra'], last:['von Athen','von Sparta','von Theben','von Mykene','von Korinth'] },
+    meaning: { de:'der Antike', fr:'de l\'Antiquité', en:'of Antiquity' }
+  },
+  egyptian: {
+    male:   { first:['Amenhotep','Thutmose','Ramesses','Khufu','Imhotep','Sennefer','Nebhepetre','Sesostris','Horemheb','Ahmose'], last:['Ra-Gesegneter','Sohn des Nil','Hüter der Pyramiden','Pharaos Schatten','des Osiris'] },
+    female: { first:['Nefertiti','Cleopatra','Hatshepsut','Nefertari','Isis','Bastet','Merit','Tiye','Ankhesenamun','Meritaten'], last:['Tochter der Isis','Mondgöttin','Hüterin des Nils','Schlange des Ra','Königin der Wüste'] },
+    meaning: { de:'des Nils', fr:'du Nil', en:'of the Nile' }
+  },
+  celtic: {
+    male:   { first:['Brennus','Vercingetorix','Ambiorix','Caratacus','Dunnorix','Orgetorix','Cassivellaunus','Cunobelin','Tasciovanus'], last:['ap Dafydd','fab Gwydion','mab Lyr','mac Cecht'] },
+    female: { first:['Boudicca','Medb','Brigid','Deirdre','Aine','Cailleach','Rhiannon','Ceridwen','Morrigan','Scathach','Epona','Etain'], last:['ferch Rhiannon','ní Chuinn','ingen Flainn','ingen Brigid','verch Urien'] },
+    meaning: { de:'der Druiden', fr:'des Druides', en:'of the Druids' }
+  },
+  mongol: {
+    male:   { first:['Temüjin','Ögedei','Chagatai','Tolui','Möngke','Kublai','Hulagu','Berke','Batu','Subutai','Jebe','Güyük'], last:['der Unbesiegbare','Sturm der Steppe','Eiserner Reiter','Herr der Horden'] },
+    female: { first:['Börte','Hoelun','Töregene','Sorqaqtani','Oghul','Mandukhai','Khatun','Alaqai','Nambui','Oruqina'], last:['der Steppe','Herrin der Horden','Mondprinzessin','Steppenadler-Tochter'] },
+    meaning: { de:'der Steppe', fr:'des steppes', en:'of the Steppe' }
+  },
+  spartan: {
+    male:   { first:['Leonidas','Pausanias','Lysander','Brasidas','Agesilaus','Cleomenes','Agis','Ariston','Chilon','Damaratos','Lacedaemon'], last:['Sohn Spartas','Wächter der 300','Held von Thermopylae','Schild Griechenlands'] },
+    female: { first:['Gorgo','Agiatis','Chilonis','Lampito','Cynisca','Timaia','Laodamia','Kratesikleia','Agesistrata'], last:['Tochter Spartas','Kriegerin Lakoniens','Schild der Polis','Ehre Spartas'] },
+    meaning: { de:'von Sparta', fr:'de Sparte', en:'of Sparta' }
+  },
+  aztec: {
+    male:   { first:['Itzcoatl','Moctezuma','Tlacaelel','Ahuitzotl','Cuauhtémoc','Cuitláhuac','Chimalpopoca','Tezozomoc'], last:['Adler','Jaguar','Ozelot','Kolibri','Kondor'] },
+    female: { first:['Xochiquetzal','Citlali','Ixchel','Malinalxochitl','Coatlicue','Mayahuel','Toci','Xilonen','Tlazolteotl','Coyolxauhqui'], last:['Blume','Mondgöttin','Schlangenröckin','Maiskönigin','Regenbogen'] },
+    meaning: { de:'der Sonne', fr:'du Soleil', en:'of the Sun' }
+  },
+  maori: {
+    male:   { first:['Tāne','Rongo','Māui','Kupe','Toi','Whatonga','Tara','Hoturoa','Tamatea'], last:['Nui','Roa','Mana','Atua','Ngeru'] },
+    female: { first:['Papatūānuku','Hine','Kurawaka','Muriranga','Niwareka','Hineahuone','Hinetītama','Ruaumoko','Waimārie','Aroha'], last:['Pounamu','Aroha','Wairua','Moana','Rangi'] },
+    meaning: { de:'des Ozeans', fr:'de l\'Océan', en:'of the Ocean' }
+  },
+  germanic: {
+    male:   { first:['Arminius','Adalbert','Hildebrand','Theodebert','Chlodwig','Gundahar','Ragnold','Sigismund'], last:['von der Eiche','vom Rhein','Eisenherz','Schildträger','Donnerkind'] },
+    female: { first:['Thusnelda','Brunhild','Hildegard','Mathilde','Gertrude','Kunigunde','Adelheid','Walburga','Friederike','Liutgard'], last:['vom Rhein','der Tapferen','Waldtochter','Mondweberin','Schicksalsmaid'] },
+    meaning: { de:'des Waldes', fr:'de la forêt', en:'of the Forest' }
+  },
+  brazil: {
+    male:   { first:['Ronaldinho','Fabinho','Richarlison','Marquinhos','Casemiro','Vinicius','Rodrygo','Endrick','Militao','Fernandinho'], last:['da Silva','dos Santos','de Souza','Cavalcanti','Nascimento','Ferreira','Rodrigues'] },
+    female: { first:['Marta','Formiga','Cristiane','Debinha','Adriana','Beatriz','Tamires','Leticia','Bruna','Ludmila'], last:['da Silva','dos Santos','de Souza','Ferreira','Rodrigues','Alves','Costa'] },
+    meaning: { de:'des Rasens', fr:'du gazon', en:'of the Pitch' }
+  },
+  sweden: {
+    male:   { first:['Erik','Lars','Johan','Anders','Björn','Sven','Gustav','Karl','Henrik','Mikael','Oskar','Viktor','Axel','Emil'], last:['Eriksson','Larsson','Johansson','Andersson','Björnsson','Svensson','Karlsson','Bergström'] },
+    female: { first:['Astrid','Ingrid','Sigrid','Britta','Karin','Eva','Maja','Linnea','Saga','Frida','Elsa','Alva','Ebba'], last:['Eriksdotter','Larsdotter','Johansdotter','Andersdotter','Svensdotter','Karlsdotter','Lindström'] },
+    meaning: { de:'des Nordens', fr:'du Nord', en:'of the North' }
+  },
+  portugal: {
+    male:   { first:['Cristiano','Bernardo','Bruno','Rúben','João','Diogo','Rafael','Nuno','Gonçalo','Vitinha'], last:['Ronaldo','Silva','Fernandes','Dias','Cancelo','Leão','Costa','Carvalho'] },
+    female: { first:['Ana','Sofia','Beatriz','Carolina','Inês','Mariana','Joana','Catarina','Francisca','Rita'], last:['Silva','Costa','Santos','Ferreira','Oliveira','Rodrigues','Martins','Sousa'] },
+    meaning: { de:'der Iberischen Halbinsel', fr:'de la Péninsule', en:'of the Peninsula' }
+  },
+  nigeria: {
+    male:   { first:['Osimhen','Lookman','Iheanacho','Aribo','Iwobi','Chukwueze','Ndidi','Balogun','Awoniyi'], last:['Okoye','Eze','Nwankwo','Adeyemi','Obi','Nwosu','Chidi','Emeka'] },
+    female: { first:['Asisat','Desire','Ngozi','Chidinma','Francisca','Rasheedat','Uchenna','Evelyn','Perpetua','Gift'], last:['Oshoala','Oparanozie','Ordega','Ajibade','Nnadozie','Plumptre','Ohale'] },
+    meaning: { de:'der Savanne', fr:'de la savane', en:'of the Savanna' }
+  },
+  argentina: {
+    male:   { first:['Lionel','Ángel','Rodrigo','Alejandro','Nicolás','Lautaro','Paulo','Gonzalo','Ezequiel'], last:['Messi','Di María','De Paul','Otamendi','Acuña','Martínez','Dybala','Alvarez'] },
+    female: { first:['Yanina','Florencia','Valentina','Camila','Luciana','Agustina','Mariana','Carolina','Verónica','Natalia'], last:['González','Rodríguez','López','Martínez','García','Fernández','Romero','Díaz'] },
+    meaning: { de:'des Tangos', fr:'du Tango', en:'of the Tango' }
+  },
+  japan: {
+    male:   { first:['Takumi','Kaoru','Hiroshi','Kenji','Ryōta','Shōichi','Tatsuya','Yūki','Daichi','Naoya'], last:['Minamino','Kubo','Doan','Endo','Kamada','Tomiyasu','Yoshida','Nagatomo'] },
+    female: { first:['Yuki','Sakura','Hana','Aoi','Rin','Saki','Nana','Mio','Riko','Haruka','Yui','Mei'], last:['Yamamoto','Suzuki','Tanaka','Watanabe','Ito','Nakamura','Kobayashi','Kato'] },
+    meaning: { de:'des Feldes', fr:'du terrain', en:'of the Field' }
+  },
+  senegal: {
+    male:   { first:['Sadio','Kalidou','Edouard','Idrissa','Ismaïla','Nampalys','Bamba','Habib','Moussa','Cheikh'], last:['Mané','Koulibaly','Mendy','Gueye','Sarr','Diallo','Diatta','Ndiaye'] },
+    female: { first:['Mariama','Fatou','Aminata','Ndèye','Rokhaya','Khady','Mame','Aissatou','Sokhna','Bineta'], last:['Diallo','Diop','Ndiaye','Fall','Sow','Ba','Sarr','Cissé','Diouf'] },
+    meaning: { de:'der Teranga', fr:'de la Téranga', en:'of Teranga' }
+  },
+  croatia: {
+    male:   { first:['Luka','Ivan','Mateo','Marcelo','Dejan','Nikola','Mario','Vedran','Josip','Ante','Domagoj'], last:['Modrić','Perišić','Kovačić','Brozović','Vlašić','Gvardiol','Kramarić'] },
+    female: { first:['Ana','Maja','Ivana','Nina','Petra','Nikolina','Martina','Valentina','Andrea','Josipa'], last:['Kovačević','Jurić','Novak','Babić','Marić','Tomić','Knežević','Vuković'] },
+    meaning: { de:'des Schachbretts', fr:'de l\'échiquier', en:'of the Chessboard' }
+  },
+  iceland: {
+    male:   { first:['Gylfi','Aron','Birkir','Gunnar','Jóhann','Ragnar','Sigurdur','Eidur','Hördur','Kolbeinn'], last:['Sigurdsson','Bjarnason','Gunnarsson','Gudjohnsen','Magnusson','Halldorsson'] },
+    female: { first:['Katrín','Sigríður','Guðrún','Ragnheiður','Þóra','Helga','Ingibjörg','Vigdís','Elín','Ásta'], last:['Sigurdardóttir','Bjarnardóttir','Gunnarsdóttir','Magnúsdóttir','Eiríksdóttir'] },
+    meaning: { de:'des Geysirs', fr:'du Geyser', en:'of the Geyser' }
+  },
+  dutch: {
+    male:   { first:['Johan','Ruud','Marco','Dennis','Arjen','Robin','Wesley','Virgil','Memphis','Frenkie','Cody'], last:['van Basten','van Nistelrooy','van der Vaart','Bergkamp','Robben','van Persie','van Dijk'] },
+    female: { first:['Vivianne','Lieke','Daniëlle','Sherida','Jackie','Lineth','Jill','Victoria','Aniek','Merel'], last:['Miedema','Martens','van de Donk','Spitse','Groenen','Beerensteyn','Roord'] },
+    meaning: { de:'des Totalen Fußballs', fr:'du Football Total', en:'of Total Football' }
+  },
+  elf: {
+    male:   { first:['Aelindra','Elenmir','Faladel','Galadhrim','Orophin','Rúmil','Tauron','Caladwen','Silinde'], last:['Silberpfeil','Sternwächter','Waldflüsterer','Zeitloser','Lichtläufer'] },
+    female: { first:['Lúthien','Míriel','Niënor','Ilmatar','Galadriel','Arwen','Celebrían','Elwing','Idril','Nienor'], last:['Mondlicht','Sternenglanz','Elfenherz','Traumweberin','Silberblick','Morgenröte'] },
+    meaning: { de:'des alten Waldes', fr:'de l\'ancienne forêt', en:'of the Ancient Forest' }
+  },
+  wizard: {
+    male:   { first:['Albus','Merlin','Gandalf','Saruman','Radagast','Zosimus','Theophrastus','Cornelius','Aldric'], last:['der Graue','der Weiße','der Weise','Feuerhand','Sturmrufer','Zeitbinder'] },
+    female: { first:['Morgana','Circe','Nimue','Hecate','Jadis','Yennefer','Triss','Philippa','Sheala','Fringilla'], last:['die Weise','Mondweberin','Sternenruferin','Schicksalsbinderin','Zeitenweberin'] },
+    meaning: { de:'der arkanen Künste', fr:'des arts arcanes', en:'of the Arcane Arts' }
+  },
+  dragon: {
+    male:   { first:['Aegon','Viserys','Maekar','Jaehaerys','Aemon','Vaegon','Balerion','Daemon'], last:['Feuersturm','Drachentöter','Flügelschatten','Himmelsreiter','Flammenblut'] },
+    female: { first:['Daenerys','Rhaenyra','Rhaenys','Naerys','Saera','Visenya','Alyssa','Laena','Baela'], last:['Feuerherz','Drachenmutter','Silberschwinge','Aschenkönigin','Flammenweberin'] },
+    meaning: { de:'der ewigen Flamme', fr:'de la flamme éternelle', en:'of the Eternal Flame' }
+  },
+  scifi: {
+    male:   { first:['Orion','Nexus','Cassian','Rigel','Altair','Vega','Zyx-7','Proxima'], last:['vom Sektor 7','der Andromedaner','Quantengeist','Sternennavigator'] },
+    female: { first:['Lyra','Nova','Vela','Andromeda','Celeste','Astra','Nebula','Pulsar','Quasar','Zenith'], last:['aus Nexus Prime','Lichtgeschwindigkeit','Dunkelmaterietochter','Quantenweberin'] },
+    meaning: { de:'der Galaxis', fr:'de la Galaxie', en:'of the Galaxy' }
+  },
+  pirate: {
+    male:   { first:['Blackbeard','Calico Jack','Silverhand','Ironjaw','Stormbreaker','Daggertooth','Bloody Bill','Mad Dog'], last:['der Schrecken','vom Roten Meer','Totenkopf','Goldzahn','Meerfluch'] },
+    female: { first:['Anne Bonny','Mary Read','Grace O\'Malley','Jacquotte Delahaye','Ingela Gathenhielm','Charlotte Badger','Rachel Wall'], last:['die Gefürchtete','Schrecken der Meere','Sturmkapitänin','Schwarze Perle','Meeresfürstin'] },
+    meaning: { de:'der sieben Meere', fr:'des sept mers', en:'of the Seven Seas' }
+  },
+  western: {
+    male:   { first:['Doc','Wyatt','Jesse','Billy','Dutch','Kid','Hank','Cole','Jake','Colt','Buck','Tex','Wade','Clint'], last:['McCready','Dalton','Cassidy','Sundance','Holliday','Earp','James'] },
+    female: { first:['Annie','Belle','Calamity','Jessie','Tex','Dakota','Rio','Billie','Dusty','Kit','Dallas','Willa'], last:['Starr','Starlet','Oakley','O\'Hara','McAllister','Ramsey','Dalton','Kane'] },
+    meaning: { de:'im Wilden Westen', fr:'dans le Far West', en:'in the Wild West' }
+  },
+  vampire: {
+    male:   { first:['Vladislav','Dracula','Lazarus','Malachar','Dorian','Sebastian','Lucian','Damien','Raphael','Alaric','Lestat'], last:['von Drakenstein','Blutgraf','Nachtschatten','Ewiglebender','Schattenprinz'] },
+    female: { first:['Carmilla','Lilith','Countess Báthory','Seraphina','Isadora','Mirela','Vespera','Nocturna','Selene','Moira'], last:['die Unsterbliche','Blutgräfin','Nachtkönigin','Mondprinzessin','Schattenfürstin'] },
+    meaning: { de:'der ewigen Nacht', fr:'de la nuit éternelle', en:'of the Eternal Night' }
+  },
+  zombie: {
+    male:   { first:['Z-45','Remains','Walker','Rotten','Decay','Undead','Shambles','Gnaw','Lurk'], last:['ehemals Schmidt','früher Müller','war mal Fischer','vormals Becker'] },
+    female: { first:['Z-13','Wander','Stumble','Shuffle','Moan','Lurch','Groan','Drift','Amble'], last:['einst Schneider','vormals Weber','früher Richter','ehemals Meyer'] },
+    meaning: { de:'der Apokalypse', fr:'de l\'Apocalypse', en:'of the Apocalypse' }
+  },
+  superhero: {
+    male:   { first:['Iron','Dark','Silver','Thunder','Shadow','Blaze','Storm','Quantum','Ultra','Void'], last:['Fist','Strike','Guard','Shield','Force','Blade','Surge','Bolt','Hawk','Wolf','Titan'] },
+    female: { first:['Scarlet','Crystal','Ember','Aurora','Prism','Vortex','Solaris','Phantom','Cosmos','Neon'], last:['Wing','Strike','Shield','Surge','Bolt','Hawk','Fox','Veil','Flare','Star'] },
+    meaning: { de:'der Unschuldigen', fr:'des innocents', en:'of the Innocent' }
+  },
+  rpg: {
+    male:   { first:['Xandrel','Malachar','Drizzt','Gandrok','Thordak','Raistlin','Kvothe','Elminster'], last:['Schattenschneider','+5 Schwert','der Legendäre','Stufe 99','Maximaler Schaden'] },
+    female: { first:['Xanathos','Morrigan','Liliana','Elspeth','Nissa','Ajani','Shandris','Jaina','Yrel','Sylvanas'], last:['Mondweberin','Stufe 99','Legendär','Maximale Magie','Unsterblich','Gottmodus'] },
+    meaning: { de:'im Endgame', fr:'en fin de jeu', en:'in Endgame' }
+  },
+};
+
+// ── Hash ──────────────────────────────────────────────────────────────────────
+function hashStr(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) { h = ((h << 5) - h) + str.charCodeAt(i); h |= 0; }
+  return Math.abs(h);
+}
+function pick(arr, seed) { return arr[seed % arr.length]; }
+
+function generateName(realName, catId) {
+  const n = realName.trim().toLowerCase();
+  const data = nameData[catId];
+  if (!data) return null;
+
+  const genderKey = currentGender === 'female' ? 'female' : 'male';
+  const d = data[genderKey] || data.male;
+
+  const s1 = hashStr(n + catId + 'first');
+  const s2 = hashStr(n + catId + 'last');
+  const s3 = hashStr(n + catId + 'suffix');
+
+  let fullName;
+  if (catId === 'roman' && d.suffix) {
+    fullName = pick(d.first, s1) + ' ' + pick(d.last, s2) + ' ' + pick(d.suffix, s3);
+  } else if (catId === 'superhero') {
+    fullName = pick(d.first, s1) + pick(d.last, s2);
+  } else {
+    fullName = pick(d.first, s1) + ' ' + pick(d.last, s2);
+  }
+
+  const meaning = data.meaning[lang] || data.meaning.en;
+  const cat = categories.find(c => c.id === catId);
+  const catName = cat ? (cat[lang] || cat.en) : catId;
+  const t = i18n[lang];
+  const genderLabel = currentGender === 'female' ? t.badgeF : t.badgeM;
+  return { name: fullName, meaning: catName + ' ' + meaning, genderLabel, isFemale: currentGender === 'female' };
+}
+
+// ── State & grid ──────────────────────────────────────────────────────────────
+let selected = new Set(categories.map(c => c.id));
+
+function buildCatGrid() {
+  const grid = document.getElementById('catGrid');
+  grid.innerHTML = '';
+  categories.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn' + (selected.has(cat.id) ? ' active' : '');
+    btn.innerHTML = `<span class="cat-emoji">${cat.emoji}</span><span class="cat-name">${cat[lang] || cat.en}</span>`;
+    btn.onclick = () => { selected.has(cat.id) ? selected.delete(cat.id) : selected.add(cat.id); btn.classList.toggle('active'); };
+    grid.appendChild(btn);
+  });
+}
+
+function selectAll() { selected = new Set(categories.map(c => c.id)); buildCatGrid(); }
+function selectNone() { selected.clear(); buildCatGrid(); }
+
+// ── Generate ──────────────────────────────────────────────────────────────────
+function generate() {
+  const rawName = document.getElementById('nameInput').value.trim();
+  if (!rawName) { alert(i18n[lang].noName); return; }
+
+  detectGender(rawName);
+
+  const activeCats = categories.filter(c => selected.has(c.id));
+  const section = document.getElementById('resultsSection');
+  const empty = document.getElementById('emptyState');
+  const grid = document.getElementById('resultsGrid');
+
+  if (activeCats.length === 0) { section.style.display='none'; empty.style.display='block'; return; }
+
+  section.style.display = 'block';
+  empty.style.display = 'none';
+  grid.innerHTML = '';
+
+  activeCats.forEach((cat, i) => {
+    const result = generateName(rawName, cat.id);
+    if (!result) return;
+    const card = document.createElement('div');
+    card.className = 'result-card' + (result.isFemale ? ' female-card' : '');
+    card.style.animationDelay = (i * 0.04) + 's';
+    card.innerHTML = `
+      <div class="result-cat">
+        <span class="result-emoji">${cat.emoji}</span>
+        <span class="result-cat-name">${cat[lang] || cat.en}</span>
+      </div>
+      <div class="result-name">${result.name}</div>
+      <div class="result-meaning">${result.meaning}</div>
+      <div class="gender-badge ${result.isFemale ? 'f' : 'm'}">${result.genderLabel}</div>
+      <div class="copy-hint">${i18n[lang].copyHint}</div>
+    `;
+    card.onclick = () => copyName(result.name);
+    grid.appendChild(card);
+  });
+
+  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function copyName(name) {
+  navigator.clipboard.writeText(name).catch(() => {});
+  const toast = document.getElementById('toast');
+  toast.textContent = i18n[lang].copied + ' ' + name;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+document.getElementById('nameInput').addEventListener('keydown', e => { if (e.key === 'Enter') generate(); });
+buildCatGrid();
+</script>
+</body>
+</html>
