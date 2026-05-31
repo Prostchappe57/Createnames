@@ -7,11 +7,7 @@
   <meta name="robots" content="noindex, follow" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --gold:#c9a84c; --gold-light:#e8c97a; --gold-dark:#8a6f2e;
-      --bg:#0a0806; --bg2:#130f09; --bg3:#1c1610;
-      --text:#f0e6d0; --text-muted:#8a7a60; --radius:12px;
-    }
+    :root { --gold:#c9a84c; --gold-light:#e8c97a; --gold-dark:#8a6f2e; --bg:#0a0806; --bg2:#130f09; --bg3:#1c1610; --text:#f0e6d0; --text-muted:#8a7a60; --radius:12px; }
     *{margin:0;padding:0;box-sizing:border-box;}
     body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;}
     body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(201,168,76,0.05) 0%,transparent 60%);pointer-events:none;z-index:0;}
@@ -35,122 +31,63 @@
     .section a{color:var(--gold);text-decoration:none;}
     .section a:hover{text-decoration:underline;}
     .section p+p{margin-top:10px;}
-    .section h3{font-family:'Cinzel',serif;font-size:12px;letter-spacing:1px;color:var(--gold-light);margin:18px 0 8px;}
     footer{position:relative;z-index:1;border-top:1px solid rgba(201,168,76,0.1);padding:24px 40px;text-align:center;font-size:11px;color:var(--text-muted);font-family:'Cinzel',serif;letter-spacing:1px;}
     footer a{color:var(--gold);text-decoration:none;margin:0 12px;}
-    @media(max-width:600px){nav{padding:16px 20px;}.container{padding:40px 16px 80px;}.section{padding:20px;}}
   </style>
 </head>
 <body>
-
 <nav>
   <a href="/" class="nav-logo">CreateNames</a>
   <a href="/" class="nav-back">← Zurück</a>
 </nav>
-
 <div class="container">
   <h1 class="page-title">Datenschutzerklärung</h1>
   <div class="page-subtitle">Privacy Policy</div>
   <div class="divider"><span class="divider-icon">✦</span></div>
-
   <div class="section">
     <h2>1. Verantwortliche Stelle</h2>
-    <p>
-      Verantwortlich für die Datenverarbeitung auf dieser Website ist:<br /><br />
-      <!-- BITTE AUSFÜLLEN: -->
-      Vorname Nachname<br />
-      Musterstrasse 1, 1234 Musterstadt, Schweiz<br />
-      E-Mail: <a href="mailto:info@createnames.ch">info@createnames.ch</a>
-    </p>
+    <p>Fabian Lauer<br />Falkenstrasse 4, 4106 Therwil, Schweiz<br />E-Mail: <a href="mailto:info@createnames.ch">info@createnames.ch</a></p>
   </div>
-
   <div class="section">
     <h2>2. Welche Daten wir erheben</h2>
-    <p>Diese Website erhebt folgende Daten:</p>
     <ul>
-      <li><strong>Server-Logs:</strong> IP-Adresse, Datum/Uhrzeit, aufgerufene Seite, Browser-Typ (durch Vercel Hosting)</li>
-      <li><strong>Cookies:</strong> Spracheinstellung (localStorage), Cookie-Einwilligung (localStorage)</li>
+      <li><strong>Server-Logs:</strong> IP-Adresse, Datum/Uhrzeit, aufgerufene Seite (durch Vercel Hosting)</li>
+      <li><strong>Cookies:</strong> Spracheinstellung und Cookie-Einwilligung (localStorage)</li>
       <li><strong>Werbedaten:</strong> Google AdSense setzt Cookies für personalisierte Werbung (nur bei Zustimmung)</li>
     </ul>
-    <p>Die App selbst (Namengenerator) verarbeitet eingegebene Namen nur lokal im Browser. Es werden keine Namen an Server übermittelt.</p>
+    <p>Die App verarbeitet eingegebene Namen nur lokal im Browser – keine Übermittlung an Server.</p>
   </div>
-
   <div class="section">
     <h2>3. Cookies &amp; Einwilligung</h2>
-    <p>
-      Beim ersten Besuch erscheint ein Cookie-Banner. Sie können:
-    </p>
-    <ul>
-      <li><strong>Akzeptieren:</strong> Alle Cookies inkl. Google AdSense werden gesetzt.</li>
-      <li><strong>Ablehnen:</strong> Es werden nur technisch notwendige Daten gespeichert (Sprachpräferenz).</li>
-    </ul>
-    <p>Ihre Einwilligung wird in Ihrem Browser gespeichert und kann jederzeit durch Löschen der Browser-Daten zurückgesetzt werden.</p>
+    <p>Beim ersten Besuch erscheint ein Cookie-Banner. Bei Ablehnung werden nur technisch notwendige Daten gespeichert. Die Einwilligung kann durch Löschen der Browser-Daten zurückgesetzt werden.</p>
   </div>
-
   <div class="section">
     <h2>4. Google AdSense</h2>
-    <p>
-      Wir verwenden Google AdSense der Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA.
-    </p>
-    <p>
-      Google AdSense setzt Cookies, um personalisierte Werbeanzeigen zu schalten. Dabei können Daten in die USA übertragen werden. Google ist unter dem EU-US Data Privacy Framework zertifiziert.
-    </p>
-    <p>
-      Weitere Informationen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Datenschutzrichtlinie</a><br />
-      Werbepräferenzen verwalten: <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google Ads-Einstellungen</a>
-    </p>
+    <p>Wir verwenden Google AdSense der Google LLC, Mountain View, CA 94043, USA. Google AdSense setzt Cookies für personalisierte Werbeanzeigen.</p>
+    <p><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Datenschutzrichtlinie</a> | <a href="https://adssettings.google.com" target="_blank" rel="noopener">Werbepräferenzen verwalten</a></p>
   </div>
-
   <div class="section">
     <h2>5. Hosting (Vercel)</h2>
-    <p>
-      Diese Website wird gehostet von Vercel Inc., 340 Pine Street, Suite 701, San Francisco, CA 94104, USA.
-      Beim Aufruf der Website werden automatisch Server-Log-Daten erhoben. Diese werden nicht mit anderen Datenquellen zusammengeführt.
-    </p>
-    <p>
-      Datenschutzerklärung Vercel: <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">vercel.com/legal/privacy-policy</a>
-    </p>
+    <p>Hosting durch Vercel Inc., San Francisco, USA. Beim Aufruf werden automatisch Server-Log-Daten erhoben.<br /><a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">Datenschutzerklärung Vercel</a></p>
   </div>
-
   <div class="section">
-    <h2>6. Google Fonts</h2>
-    <p>
-      Wir laden Schriftarten von Google Fonts (Google LLC). Dabei wird Ihre IP-Adresse an Google übermittelt.
-      Rechtsgrundlage ist unser berechtigtes Interesse an einer einheitlichen Darstellung.
-    </p>
-  </div>
-
-  <div class="section">
-    <h2>7. Ihre Rechte (DSG / DSGVO)</h2>
-    <p>Sie haben folgende Rechte bezüglich Ihrer Daten:</p>
+    <h2>6. Ihre Rechte</h2>
     <ul>
-      <li>Auskunft über gespeicherte Daten</li>
-      <li>Berichtigung unrichtiger Daten</li>
-      <li>Löschung Ihrer Daten</li>
+      <li>Auskunft, Berichtigung und Löschung Ihrer Daten</li>
       <li>Einschränkung der Verarbeitung</li>
-      <li>Widerspruch gegen die Verarbeitung</li>
-      <li>Datenübertragbarkeit</li>
+      <li>Widerspruch und Datenübertragbarkeit</li>
     </ul>
-    <p>
-      Zur Ausübung dieser Rechte wenden Sie sich an: <a href="mailto:info@createnames.ch">info@createnames.ch</a>
-    </p>
+    <p>Kontakt: <a href="mailto:info@createnames.ch">info@createnames.ch</a></p>
   </div>
-
   <div class="section">
-    <h2>8. Änderungen dieser Datenschutzerklärung</h2>
-    <p>
-      Diese Datenschutzerklärung kann jederzeit angepasst werden.
-      Die aktuelle Version ist stets unter <a href="/datenschutz">createnames.ch/datenschutz</a> abrufbar.
-    </p>
-    <p>Stand: Januar 2025</p>
+    <h2>7. Änderungen</h2>
+    <p>Stand: Januar 2025. Aktuelle Version stets unter <a href="/datenschutz">createnames.ch/datenschutz</a>.</p>
   </div>
 </div>
-
 <footer>
   <a href="/">Home</a>
   <a href="/impressum">Impressum</a>
   © 2025 CreateNames.ch
 </footer>
-
 </body>
 </html>
