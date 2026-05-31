@@ -1,0 +1,246 @@
+{
+  "version": "1.0",
+  "beschreibung": "Namens-Beispiele für createnames.ch – speist Startseiten-Karten und spätere Universen-Unterseiten.",
+  "eintraege": [
+    {
+      "id": 1,
+      "eingabename": "Lukas",
+      "geschlecht": "m",
+      "universum": "Wikinger",
+      "legendaerer_name": "Fjölnir Sturmgeborener",
+      "lore": {
+        "de": "Sein Ruf weckt den Donner über der Nordsee.",
+        "fr": "Son cri réveille le tonnerre sur la mer du Nord.",
+        "en": "His call wakes the thunder over the northern sea."
+      }
+    },
+    {
+      "id": 2,
+      "eingabename": "Sophie",
+      "geschlecht": "w",
+      "universum": "Walküre",
+      "legendaerer_name": "Sigrun Schildmaid",
+      "lore": {
+        "de": "Sie wählt, wer in Walhall speisen wird.",
+        "fr": "Elle choisit qui festoiera au Valhalla.",
+        "en": "She chooses who will feast in Valhalla."
+      }
+    },
+    {
+      "id": 3,
+      "eingabename": "Marco",
+      "geschlecht": "m",
+      "universum": "Römer",
+      "legendaerer_name": "Maximus Aurelius",
+      "lore": {
+        "de": "Vor seinen Legionen beugte sich ganz Gallien.",
+        "fr": "Devant ses légions, toute la Gaule plia.",
+        "en": "Before his legions, all of Gaul bowed."
+      }
+    },
+    {
+      "id": 4,
+      "eingabename": "Elena",
+      "geschlecht": "w",
+      "universum": "Vampir",
+      "legendaerer_name": "Lady Carmilla Nachtschatten",
+      "lore": {
+        "de": "Drei Jahrhunderte trägt sie kein einziges graues Haar.",
+        "fr": "Trois siècles sans un seul cheveu gris.",
+        "en": "Three centuries, and not one grey hair."
+      }
+    },
+    {
+      "id": 5,
+      "eingabename": "Tobias",
+      "geschlecht": "m",
+      "universum": "Superheld",
+      "legendaerer_name": "Nightfall",
+      "lore": {
+        "de": "Wo die Sirenen verstummen, beginnt seine Schicht.",
+        "fr": "Là où les sirènes se taisent, son quart commence.",
+        "en": "Where the sirens fall silent, his shift begins."
+      }
+    },
+    {
+      "id": 6,
+      "eingabename": "Mara",
+      "geschlecht": "w",
+      "universum": "Drachenreiterin",
+      "legendaerer_name": "Vaelith Flammenherz",
+      "lore": {
+        "de": "Ihr Drache nennt nur sie seine Reiterin.",
+        "fr": "Son dragon n'appelle qu'elle sa cavalière.",
+        "en": "Her dragon calls no one else its rider."
+      }
+    },
+    {
+      "id": 7,
+      "eingabename": "David",
+      "geschlecht": "m",
+      "universum": "Ritter",
+      "legendaerer_name": "Sir Aldric vom Eisernen Tor",
+      "lore": {
+        "de": "Sein Schwur brach nie, sein Schild auch nicht.",
+        "fr": "Son serment n'a jamais cédé, ni son bouclier.",
+        "en": "His oath never broke, nor did his shield."
+      }
+    },
+    {
+      "id": 8,
+      "eingabename": "Lea",
+      "geschlecht": "w",
+      "universum": "Elfe",
+      "legendaerer_name": "Aelwen Mondsilber",
+      "lore": {
+        "de": "Sie hört Lieder, die Bäume vor tausend Jahren sangen.",
+        "fr": "Elle entend les chants que les arbres chantaient jadis.",
+        "en": "She hears songs the trees sang a thousand years ago."
+      }
+    },
+    {
+      "id": 9,
+      "eingabename": "Jonas",
+      "geschlecht": "m",
+      "universum": "Pirat",
+      "legendaerer_name": "Käpt'n Blackwell der Gezeitenlose",
+      "lore": {
+        "de": "Kein Hafen hält ihn, keine Flut bezwingt ihn.",
+        "fr": "Aucun port ne le retient, aucune marée ne le dompte.",
+        "en": "No harbor holds him, no tide tames him."
+      }
+    },
+    {
+      "id": 10,
+      "eingabename": "Nina",
+      "geschlecht": "w",
+      "universum": "Cyberpunk",
+      "legendaerer_name": "Nyx-7",
+      "lore": {
+        "de": "Ihr Code öffnet Türen, die es offiziell nicht gibt.",
+        "fr": "Son code ouvre des portes qui n'existent pas.",
+        "en": "Her code opens doors that officially don't exist."
+      }
+    },
+    {
+      "id": 11,
+      "eingabename": "Felix",
+      "geschlecht": "m",
+      "universum": "Magier",
+      "legendaerer_name": "Erzmagus Thalorin",
+      "lore": {
+        "de": "Er las das letzte Buch, das niemand lesen sollte.",
+        "fr": "Il a lu le dernier livre interdit à tous.",
+        "en": "He read the last book no one was meant to read."
+      }
+    },
+    {
+      "id": 12,
+      "eingabename": "Clara",
+      "geschlecht": "w",
+      "universum": "Samurai",
+      "legendaerer_name": "Akane Klingentanz",
+      "lore": {
+        "de": "Ihr Schnitt fällt, bevor das Auge ihn sieht.",
+        "fr": "Sa lame tombe avant que l'œil ne la voie.",
+        "en": "Her blade falls before the eye can follow."
+      }
+    },
+    {
+      "id": 13,
+      "eingabename": "Paul",
+      "geschlecht": "m",
+      "universum": "Wikinger-Jarl",
+      "legendaerer_name": "Ragnvald Eisfaust",
+      "lore": {
+        "de": "Drei Königreiche zahlen ihm Tribut aus Furcht.",
+        "fr": "Trois royaumes lui paient tribut par crainte.",
+        "en": "Three kingdoms pay him tribute out of fear."
+      }
+    },
+    {
+      "id": 14,
+      "eingabename": "Anna",
+      "geschlecht": "w",
+      "universum": "Göttin",
+      "legendaerer_name": "Astraia Sterngeborene",
+      "lore": {
+        "de": "Ihr Name steht zwischen den ältesten Sternen geschrieben.",
+        "fr": "Son nom est inscrit parmi les plus anciennes étoiles.",
+        "en": "Her name is written among the oldest stars."
+      }
+    },
+    {
+      "id": 15,
+      "eingabename": "Tim",
+      "geschlecht": "m",
+      "universum": "RPG-Held",
+      "legendaerer_name": "Theron der Namenlose",
+      "lore": {
+        "de": "Aus dem Nichts kam er, in Legenden bleibt er.",
+        "fr": "Venu de nulle part, il demeure dans les légendes.",
+        "en": "From nowhere he came, in legend he remains."
+      }
+    },
+    {
+      "id": 16,
+      "eingabename": "Julia",
+      "geschlecht": "w",
+      "universum": "Hexe",
+      "legendaerer_name": "Morgaine Rabenkrähe",
+      "lore": {
+        "de": "Drei Raben fliegen, wohin ihr Wille sie schickt.",
+        "fr": "Trois corbeaux volent là où sa volonté l'ordonne.",
+        "en": "Three ravens fly wherever her will commands."
+      }
+    },
+    {
+      "id": 17,
+      "eingabename": "Simon",
+      "geschlecht": "m",
+      "universum": "Gladiator",
+      "legendaerer_name": "Brutus der Unbesiegte",
+      "lore": {
+        "de": "Vierzig Kämpfe, vierzig Mal trug ihn die Arena hinaus als Sieger.",
+        "fr": "Quarante combats, quarante victoires sous les acclamations.",
+        "en": "Forty fights, forty times carried out as victor."
+      }
+    },
+    {
+      "id": 18,
+      "eingabename": "Laura",
+      "geschlecht": "w",
+      "universum": "Eiskönigin",
+      "legendaerer_name": "Königin Isolde Frostkrone",
+      "lore": {
+        "de": "Ihr Atem lässt ganze Flüsse über Nacht erstarren.",
+        "fr": "Son souffle gèle des rivières entières en une nuit.",
+        "en": "Her breath freezes whole rivers overnight."
+      }
+    },
+    {
+      "id": 19,
+      "eingabename": "Max",
+      "geschlecht": "m",
+      "universum": "Steampunk",
+      "legendaerer_name": "Professor Cogsworth Eisenrad",
+      "lore": {
+        "de": "Seine Maschinen denken, lange bevor er es ihnen erlaubt.",
+        "fr": "Ses machines pensent bien avant qu'il ne l'autorise.",
+        "en": "His machines think long before he allows them to."
+      }
+    },
+    {
+      "id": 20,
+      "eingabename": "Sarah",
+      "geschlecht": "w",
+      "universum": "Phönix",
+      "legendaerer_name": "Seraphina Ascharot",
+      "lore": {
+        "de": "Aus jeder Asche steigt sie strahlender als zuvor.",
+        "fr": "De chaque cendre, elle renaît plus éclatante.",
+        "en": "From every ash she rises brighter than before."
+      }
+    }
+  ]
+}

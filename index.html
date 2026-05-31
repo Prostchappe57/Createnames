@@ -14,6 +14,23 @@
   <meta property="og:description" content="Gib deinen Namen ein und entdecke, wer du in einer anderen Welt wärst." />
   <meta property="og:url" content="https://createnames.ch/" />
   <meta property="og:type" content="website" />
+  <!-- Teilen-Vorschaubild (absolute URL, Pflicht für Facebook/LinkedIn) -->
+  <meta property="og:image" content="https://createnames.ch/og-image-de.png" />
+  <meta property="og:image:secure_url" content="https://createnames.ch/og-image-de.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="CreateNames – Entdecke dein legendäres Ich" />
+  <meta property="og:locale" content="de_CH" />
+  <meta property="og:locale:alternate" content="fr_CH" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:site_name" content="CreateNames" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CreateNames – Legendäre Namen für dich" />
+  <meta name="twitter:description" content="Gib deinen Namen ein und entdecke, wer du in einer anderen Welt wärst." />
+  <meta name="twitter:image" content="https://createnames.ch/og-image-de.png" />
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -246,6 +263,80 @@
     /* ── Animations ── */
     @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
 
+    /* ── Examples Section (Beispiel-Karten) ── */
+    .examples {
+      position: relative; z-index: 1;
+      max-width: 980px; margin: 0 auto;
+      padding: 56px 20px 16px;
+    }
+    .examples-intro {
+      text-align: center; max-width: 520px; margin: 0 auto 40px;
+      font-size: 15px; color: var(--text-muted); line-height: 1.7;
+    }
+    /* MOBILE-FIRST: Standard = 1 Spalte (Handy zuerst) */
+    .examples-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    .example-card {
+      display: block; text-decoration: none; color: inherit;
+      background: var(--bg3);
+      border: 1px solid rgba(201,168,76,0.14);
+      border-radius: var(--radius);
+      padding: 24px 22px;
+      text-align: center;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .example-card:hover, .example-card:focus-visible {
+      border-color: rgba(201,168,76,0.45);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+      outline: none;
+    }
+    .example-universe {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: 'Cinzel', serif; font-size: 10px;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 16px;
+    }
+    .example-universe .uni-icon { font-size: 20px; }
+    .example-input {
+      font-size: 12px; color: var(--text-muted);
+      letter-spacing: 1px; margin-bottom: 4px;
+    }
+    .example-input::before { content: '“'; }
+    .example-input::after  { content: '”'; }
+    .example-arrow {
+      color: var(--gold-dark); font-size: 14px; margin: 2px 0 6px;
+    }
+    .example-legend {
+      font-family: 'Cinzel Decorative', cursive; font-weight: 900;
+      font-size: clamp(22px, 6vw, 28px);
+      background: linear-gradient(135deg, #8a6f2e 0%, #e8c97a 50%, #c9a84c 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1.2; margin-bottom: 14px;
+      word-break: break-word; /* sehr lange Namen brechen sauber um */
+    }
+    .example-lore {
+      font-size: 13.5px; color: #b0a090; line-height: 1.65;
+      font-style: italic;
+      /* lange Lore-Sätze: sauberer Umbruch, keine Überläufe */
+      overflow-wrap: break-word; hyphens: auto;
+    }
+    .examples-cta {
+      text-align: center; margin-top: 36px;
+    }
+    /* Tablet: 2 Spalten ab 600px */
+    @media (min-width: 600px) {
+      .examples-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    }
+    /* Desktop: 3 Spalten ab 900px */
+    @media (min-width: 900px) {
+      .examples-grid { grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    }
+
     /* ── Mobile ── */
     @media (max-width: 600px) {
       nav { padding: 16px 20px; }
@@ -279,6 +370,7 @@
     </div>
     <div class="lang-switcher">
       <button class="lang-btn active" onclick="setLang('de')" id="lang-de">DE</button>
+      <button class="lang-btn" onclick="setLang('fr')" id="lang-fr">FR</button>
       <button class="lang-btn" onclick="setLang('en')" id="lang-en">EN</button>
     </div>
   </nav>
@@ -306,6 +398,19 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
+
+  <!-- ══ BEISPIEL-KARTEN ══ -->
+  <section class="examples" id="examples" aria-label="Beispiele">
+    <div class="section-title" id="examples-title">Sieh dir Beispiele an</div>
+    <p class="examples-intro" id="examples-intro">
+      So verwandelt CreateNames einen Namen in eine Legende. Tippe auf eine Karte und probiere es selbst.
+    </p>
+    <!-- Wird per JS aus examples.json befüllt (NICHT hardcoden) -->
+    <div class="examples-grid" id="examples-grid"></div>
+    <div class="examples-cta">
+      <a href="#app" class="hero-cta" id="examples-cta">Jetzt selbst ausprobieren ✦</a>
+    </div>
+  </section>
 
   <!-- ══ FEATURES ══ -->
   <section class="features" id="features">
@@ -386,6 +491,9 @@
         feat3Title: '3 Sprachen', feat3Desc: 'Deutsch, Französisch und Englisch – wechsle jederzeit.',
         feat4Title: 'Sofort & kostenlos', feat4Desc: 'Kein Login, keine Kosten. Einfach Namen eingeben und loslegen.',
         appLabel: '— Starte hier —',
+        examplesTitle: 'Sieh dir Beispiele an',
+        examplesIntro: 'So verwandelt CreateNames einen Namen in eine Legende. Tippe auf eine Karte und probiere es selbst.',
+        examplesCta: 'Jetzt selbst ausprobieren ✦',
         cookieText: 'Wir verwenden Cookies für Analysen und personalisierte Werbung (Google AdSense). Weitere Infos in unserer ',
         cookieLink: 'Datenschutzerklärung',
         cookieAccept: 'Akzeptieren ✦', cookieDecline: 'Ablehnen',
@@ -404,6 +512,9 @@
         feat3Title: '3 Languages', feat3Desc: 'German, French and English – switch at any time.',
         feat4Title: 'Free & instant', feat4Desc: 'No login, no cost. Just enter a name and go.',
         appLabel: '— Start here —',
+        examplesTitle: 'See some examples',
+        examplesIntro: 'This is how CreateNames turns a name into a legend. Tap a card and try it yourself.',
+        examplesCta: 'Try it yourself ✦',
         cookieText: 'We use cookies for analytics and personalised ads (Google AdSense). See our ',
         cookieLink: 'Privacy Policy',
         cookieAccept: 'Accept ✦', cookieDecline: 'Decline',
@@ -411,6 +522,27 @@
         navApp: 'App', navImpressum: 'Imprint', navDatenschutz: 'Privacy',
         footerImpressum: 'Imprint', footerDatenschutz: 'Privacy', footerContact: 'Contact',
         footerCopy: '© 2025 CreateNames.ch – All rights reserved',
+      },
+      fr: {
+        heroTagline: 'Découvre ta légende',
+        heroDesc: 'Entre ton nom – et découvre qui tu serais en Viking, Romain, super-héros ou vampire. Plus de 20 univers épiques t\'attendent.',
+        heroCta: 'Découvrir les noms ✦',
+        featuresTitle: 'Ce que CreateNames offre',
+        feat1Title: '20+ univers', feat1Desc: 'Du Viking au Romain jusqu\'au héros de RPG – ton nom à toutes les époques.',
+        feat2Title: 'Détection du genre', feat2Desc: 'L\'application détecte automatiquement si ton nom est féminin ou masculin.',
+        feat3Title: '3 langues', feat3Desc: 'Allemand, français et anglais – change à tout moment.',
+        feat4Title: 'Gratuit & instantané', feat4Desc: 'Pas de compte, pas de frais. Entre un nom et c\'est parti.',
+        appLabel: '— Commence ici —',
+        examplesTitle: 'Regarde des exemples',
+        examplesIntro: 'Voici comment CreateNames transforme un nom en légende. Touche une carte et essaie toi-même.',
+        examplesCta: 'Essaie toi-même ✦',
+        cookieText: 'Nous utilisons des cookies pour les analyses et la publicité personnalisée (Google AdSense). Plus d\'infos dans notre ',
+        cookieLink: 'Politique de confidentialité',
+        cookieAccept: 'Accepter ✦', cookieDecline: 'Refuser',
+        adLabel: 'Publicité',
+        navApp: 'App', navImpressum: 'Mentions légales', navDatenschutz: 'Confidentialité',
+        footerImpressum: 'Mentions légales', footerDatenschutz: 'Confidentialité', footerContact: 'Contact',
+        footerCopy: '© 2025 CreateNames.ch – Tous droits réservés',
       }
     };
 
@@ -433,11 +565,14 @@
       document.getElementById('feat4-title').textContent = t.feat4Title;
       document.getElementById('feat4-desc').textContent = t.feat4Desc;
       document.getElementById('app-label').textContent = t.appLabel;
+      document.getElementById('examples-title').textContent = t.examplesTitle;
+      document.getElementById('examples-intro').textContent = t.examplesIntro;
+      document.getElementById('examples-cta').textContent = t.examplesCta;
       document.getElementById('ad-label-top').textContent = t.adLabel;
       document.getElementById('ad-label-bottom').textContent = t.adLabel;
       document.getElementById('nav-app').textContent = t.navApp;
-      document.getElementById('nav-impressum').textContent = l === 'en' ? 'Imprint' : 'Impressum';
-      document.getElementById('nav-datenschutz').textContent = l === 'en' ? 'Privacy' : 'Datenschutz';
+      document.getElementById('nav-impressum').textContent = t.navImpressum;
+      document.getElementById('nav-datenschutz').textContent = t.navDatenschutz;
       document.getElementById('footer-impressum').textContent = t.footerImpressum;
       document.getElementById('footer-datenschutz').textContent = t.footerDatenschutz;
       document.getElementById('footer-contact').textContent = t.footerContact;
@@ -449,7 +584,10 @@
         el.childNodes[0].textContent = t.cookieText;
       });
       document.getElementById('lang-de').classList.toggle('active', l === 'de');
+      document.getElementById('lang-fr').classList.toggle('active', l === 'fr');
       document.getElementById('lang-en').classList.toggle('active', l === 'en');
+      // Karten in der neuen Sprache neu zeichnen (Lore-Satz folgt der Sprache)
+      renderExampleCards();
     }
 
     // ── Cookie Banner ────────────────────────────────────────────────────────────
@@ -484,7 +622,110 @@
       }
     }, 500);
 
+    // ── Beispiel-Karten ───────────────────────────────────────────────────────────
+    // Daten kommen aus examples.json (von Otis). Fallback = eingebettete Defaults,
+    // damit die Seite auch ohne Server (lokaler Doppelklick) funktioniert.
+    const CARD_ICON = '✨';     // einheitliches Icon für alle Karten
+    const CARDS_TO_SHOW = 6;    // wie viele Karten auf der Startseite
+    let examplesData = null;
+    let selectedExamples = null; // einmal zufällig gewählt, bleibt beim Sprachwechsel gleich
+
+    // Mini-Fallback (echte Otis-Daten), falls examples.json nicht geladen werden kann.
+    const EXAMPLES_FALLBACK = { eintraege: [
+      { eingabename:'Lukas', universum:'Wikinger', legendaerer_name:'Fjölnir Sturmgeborener',
+        lore:{ de:'Sein Ruf weckt den Donner über der Nordsee.',
+               fr:'Son cri réveille le tonnerre sur la mer du Nord.',
+               en:'His call wakes the thunder over the northern sea.' } },
+      { eingabename:'Elena', universum:'Vampir', legendaerer_name:'Lady Carmilla Nachtschatten',
+        lore:{ de:'Drei Jahrhunderte trägt sie kein einziges graues Haar.',
+               fr:'Trois siècles sans un seul cheveu gris.',
+               en:'Three centuries, and not one grey hair.' } },
+      { eingabename:'Nina', universum:'Cyberpunk', legendaerer_name:'Nyx-7',
+        lore:{ de:'Ihr Code öffnet Türen, die es offiziell nicht gibt.',
+               fr:'Son code ouvre des portes qui n\'existent pas.',
+               en:'Her code opens doors that officially don\'t exist.' } },
+      { eingabename:'Mara', universum:'Drachenreiterin', legendaerer_name:'Vaelith Flammenherz',
+        lore:{ de:'Ihr Drache nennt nur sie seine Reiterin.',
+               fr:'Son dragon n\'appelle qu\'elle sa cavalière.',
+               en:'Her dragon calls no one else its rider.' } },
+      { eingabename:'Anna', universum:'Göttin', legendaerer_name:'Astraia Sterngeborene',
+        lore:{ de:'Ihr Name steht zwischen den ältesten Sternen geschrieben.',
+               fr:'Son nom est inscrit parmi les plus anciennes étoiles.',
+               en:'Her name is written among the oldest stars.' } },
+      { eingabename:'Sarah', universum:'Phönix', legendaerer_name:'Seraphina Ascharot',
+        lore:{ de:'Aus jeder Asche steigt sie strahlender als zuvor.',
+               fr:'De chaque cendre, elle renaît plus éclatante.',
+               en:'From every ash she rises brighter than before.' } }
+    ]};
+
+    // Liest beide Feldnamen-Varianten (Otis: eintraege/eingabename/...,
+    // alte Variante: examples/input/...) und liefert ein einheitliches Objekt.
+    function normalizeEntry(e) {
+      return {
+        input:    e.eingabename     || e.input    || '',
+        legend:   e.legendaerer_name || e.legend  || '',
+        universe: e.universum        || e.universe || '',
+        lore:     e.lore || {}
+      };
+    }
+    function getAllEntries(data) {
+      return data.eintraege || data.examples || [];
+    }
+
+    // Fisher-Yates: zufällige Reihenfolge, dann die ersten N nehmen.
+    function pickRandom(arr, n) {
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a.slice(0, n);
+    }
+
+    function renderExampleCards() {
+      const grid = document.getElementById('examples-grid');
+      if (!grid || !selectedExamples) return;
+      grid.innerHTML = '';
+      selectedExamples.forEach(raw => {
+        const item = normalizeEntry(raw);
+        const lore = (item.lore && (item.lore[currentLang] || item.lore.de)) || '';
+        const card = document.createElement('a');
+        card.className = 'example-card';
+        card.href = '#app';
+        card.setAttribute('role', 'button');
+        // textContent statt innerHTML -> sicher gegen fehlerhafte/böse Daten
+        const uni = document.createElement('div');
+        uni.className = 'example-universe';
+        const ic = document.createElement('span'); ic.className = 'uni-icon'; ic.textContent = CARD_ICON;
+        const un = document.createElement('span'); un.textContent = item.universe;
+        uni.appendChild(ic); uni.appendChild(un);
+
+        const inp = document.createElement('div'); inp.className = 'example-input'; inp.textContent = item.input;
+        const arr = document.createElement('div'); arr.className = 'example-arrow'; arr.textContent = '↓';
+        const leg = document.createElement('div'); leg.className = 'example-legend'; leg.textContent = item.legend;
+        const lor = document.createElement('div'); lor.className = 'example-lore'; lor.textContent = lore;
+
+        card.append(uni, inp, arr, leg, lor);
+        grid.appendChild(card);
+      });
+    }
+
+    // Wählt 6 zufällige Einträge aus – nur EINMAL pro Seitenaufruf,
+    // damit ein Sprachwechsel dieselben Karten behält.
+    function selectExamples() {
+      const data = examplesData || EXAMPLES_FALLBACK;
+      selectedExamples = pickRandom(getAllEntries(data), CARDS_TO_SHOW);
+    }
+
+    function loadExamples() {
+      fetch('examples.json')
+        .then(r => { if (!r.ok) throw new Error('no file'); return r.json(); })
+        .then(data => { examplesData = data; selectExamples(); renderExampleCards(); })
+        .catch(() => { examplesData = null; selectExamples(); renderExampleCards(); }); // Fallback
+    }
+
     // ── Init ─────────────────────────────────────────────────────────────────────
+    loadExamples();
     setLang(currentLang);
   </script>
 </body>
